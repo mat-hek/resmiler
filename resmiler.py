@@ -1,8 +1,7 @@
 import cv2
 import sys
-print(cv2.data.haarcascades)
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_smile.xml')
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('haarcascade_smile.xml')
 video_capture = cv2.VideoCapture(0)
 while True:
   ret, img = video_capture.read()
