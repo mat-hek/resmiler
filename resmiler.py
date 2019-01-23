@@ -26,12 +26,14 @@ while True:
         for (ex, ey, ew, eh) in smiles:
             smile_roi = roi_color[ey:ey+eh, ex:ex+ew]
             if DEBUG:
-                cv2.rectangle(roi_color, (ex-1, ey-1), (ex+ew+2, ey+eh+2), (0, 255, 0), 2)
+                cv2.rectangle(roi_color, (ex-1, ey-1),
+                              (ex+ew+2, ey+eh+2), (0, 255, 0), 2)
             scaled_smile_img = cv2.resize(smile_image, (ew, eh))
             # Do the alpha blending
             alpha = scaled_smile_img[:, :, 3] / 255
             alpha_mask = alpha[:, :, np.newaxis]
-            alpha_mask = np.concatenate((alpha_mask, alpha_mask, alpha_mask), axis=2)
+            alpha_mask = np.concatenate(
+                (alpha_mask, alpha_mask, alpha_mask), axis=2)
             rgb = scaled_smile_img[:, :, :3]
             # cv2.imshow('mask', alpha_mask * 255)
             bg = (1 - alpha_mask) * smile_roi
